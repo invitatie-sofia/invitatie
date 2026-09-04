@@ -369,7 +369,7 @@
       <div class="btns">
         <a class="btn btn-solid" id="btnYes" target="_blank" rel="noopener">Voi fi acolo</a>
         <a class="btn btn-blush" id="btnNo" target="_blank" rel="noopener">Nu pot ajunge</a>
-        <a class="btn btn-outline" id="btnCal" href="#">Adaugă în calendar</a>
+        <a class="btn btn-outline" id="btnCal" target="_blank" rel="noopener">Adaugă în calendar</a>
       </div>
 
       <div class="phone-line">Confirmare telefonică: <a href="tel:+4915562074649">+49 15562 074649</a></div>
@@ -427,27 +427,31 @@
   document.getElementById('btnYes').href = `https://wa.me/${waNumber}?text=${yesMsg}`;
   document.getElementById('btnNo').href  = `https://wa.me/${waNumber}?text=${noMsg}`;
 
-  document.getElementById('btnCal').addEventListener('click', function(e){
-    e.preventDefault();
-    const ics = [
-      'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Botez Sofia Maria//RO',
-      'BEGIN:VEVENT',
-      'UID:'+Date.now()+'@invitatie-sofia',
-      'DTSTAMP:20260901T000000Z',
-      'DTSTART:20261031T160000',
-      'DTEND:20261031T220000',
-      'SUMMARY:Botezul Sofiei Maria',
-      'DESCRIPTION:Sfânta Taină a Botezului la Biserica Sfântul Dumitru (ora 16:00)\\, urmată de petrecere la Manifesto Events\\, Fierbinți-Târg (ora 18:00).',
-      'LOCATION:Biserica Sfântul Dumitru',
-      'END:VEVENT','END:VCALENDAR'
-    ].join('\r\n');
-    const blob = new Blob([ics], {type:'text/calendar'});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url; a.download = 'Botez-Sofia-Maria.ics';
-    document.body.appendChild(a); a.click(); document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-  });
+  // Buton "Adauga in calendar" -> deschide direct calendarul pe 31 Octombrie 2026
+  (function(){
+    var btn = document.getElementById('btnCal');
+    var gcal = "https://calendar.google.com/calendar/render?action=TEMPLATE&text=Botezul%20Sofiei%20Maria&dates=20261031T160000/20261031T220000&ctz=Europe/Bucharest&details=Sf%C3%A2nta%20Tain%C4%83%20a%20Botezului%20la%20Biserica%20Sf%C3%A2ntul%20Dumitru%20%28ora%2016%3A00%29%2C%20urmat%C4%83%20de%20petrecere%20la%20Manifesto%20Events%2C%20Fierbin%C8%9Bi-T%C3%A2rg%20%28ora%2018%3A00%29.&location=Biserica%20Sf%C3%A2ntul%20Dumitru%2C%20Dridu";
+    btn.href = gcal;
+
+    // Pe iPhone/iPad deschidem evenimentul direct in aplicatia Calendar
+    var isApple = /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent);
+    if (isApple) {
+      var ics = [
+        'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Botez Sofia Maria//RO','CALSCALE:GREGORIAN',
+        'BEGIN:VEVENT',
+        'UID:botez-sofia-2026@invitatie-sofia',
+        'DTSTAMP:20260901T000000Z',
+        'DTSTART;TZID=Europe/Bucharest:20261031T160000',
+        'DTEND;TZID=Europe/Bucharest:20261031T220000',
+        'SUMMARY:Botezul Sofiei Maria',
+        'DESCRIPTION:Sfânta Taină a Botezului la Biserica Sfântul Dumitru (ora 16:00)\\, urmată de petrecere la Manifesto Events\\, Fierbinți-Târg (ora 18:00).',
+        'LOCATION:Biserica Sfântul Dumitru\\, Dridu',
+        'END:VEVENT','END:VCALENDAR'
+      ].join('\\r\\n');
+      btn.href = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(ics);
+      btn.removeAttribute('target');
+    }
+  })();
 </script>
 </body>
 </html>
