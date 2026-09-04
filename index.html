@@ -38,6 +38,7 @@
   .script{font-family:'Parisienne', cursive;}
   .caps{font-family:'Cinzel', serif; letter-spacing:.12em; text-transform:uppercase;}
 
+  /* ---------- COVER / ENVELOPE ---------- */
   #cover{
     position:fixed; inset:0; z-index:50;
     display:flex; align-items:center; justify-content:center;
@@ -45,33 +46,74 @@
       radial-gradient(circle at 30% 20%, rgba(230,207,161,.5), transparent 45%),
       radial-gradient(circle at 80% 85%, rgba(242,217,222,.6), transparent 50%),
       linear-gradient(160deg, var(--cream) 0%, var(--cream-2) 100%);
-    transition: opacity .9s ease, visibility .9s ease;
+    transition: opacity .8s ease .25s, visibility .8s ease .25s;
   }
   #cover.hide{opacity:0; visibility:hidden; pointer-events:none;}
-  .cover-frame{
-    width:min(86vw,340px); aspect-ratio:3/4.6;
-    border:1px solid var(--gold-light);
-    outline:1px solid var(--gold-light);
-    outline-offset:8px;
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-    gap:22px; text-align:center; padding:30px;
-    background:rgba(255,250,243,.5);
-    cursor:pointer;
+  .whiteout{
+    position:absolute; inset:0; background:radial-gradient(circle at 50% 55%, #fff7e8, #f6e6c9 55%, transparent 78%);
+    opacity:0; pointer-events:none; transition:opacity .5s ease;
   }
+  #cover.opening .whiteout{opacity:1; transition:opacity .5s ease .55s;}
+
+  .env-wrap{
+    display:flex; flex-direction:column; align-items:center; gap:26px;
+    cursor:pointer; -webkit-tap-highlight-color:transparent;
+  }
+  .envelope-stage{ width:min(70vw,260px); aspect-ratio:3/4; perspective:900px; }
+  .envelope{
+    position:relative; width:100%; height:100%; transform-style:preserve-3d;
+    filter:drop-shadow(0 18px 30px -14px rgba(107,74,42,.55));
+  }
+  .flap{
+    position:absolute; inset:0; background:#fbf5ea;
+    background-image:
+      repeating-linear-gradient(115deg, rgba(184,146,90,.05) 0 2px, transparent 2px 10px);
+  }
+  .flap svg{position:absolute; stroke:#d8bd8e; fill:none; stroke-width:1;}
+  .flap-left{  clip-path:polygon(0 0, 0 100%, 50% 50%); border-right:1px solid var(--gold-light); }
+  .flap-right{ clip-path:polygon(100% 0, 100% 100%, 50% 50%); border-left:1px solid var(--gold-light); }
+  .flap-bottom{clip-path:polygon(0 100%, 100% 100%, 50% 50%); border-top:1px solid var(--gold-light); }
+  .flap-top{
+    clip-path:polygon(0 0, 100% 0, 50% 50%); border-bottom:1px solid var(--gold-light);
+    transform-origin:50% 0%; transition:transform 1s cubic-bezier(.5,0,.2,1);
+    z-index:3;
+  }
+  .envelope.opening .flap-top{ transform:rotateX(-158deg) translateZ(1px); }
+
+  .beam{
+    position:absolute; left:50%; top:50%; width:160%; height:130%;
+    transform:translate(-50%,-92%) scale(.25); transform-origin:50% 100%;
+    clip-path:polygon(38% 100%, 62% 100%, 100% 0%, 0% 0%);
+    background:conic-gradient(from 180deg at 50% 100%, transparent, #ffe6ad, #fff6df, #ffe6ad, transparent);
+    opacity:0; transition:opacity .7s ease, transform 1s cubic-bezier(.3,0,.2,1);
+    z-index:2; mix-blend-mode:screen; pointer-events:none;
+  }
+  .envelope.opening .beam{ opacity:.95; transform:translate(-50%,-92%) scale(1); transition-delay:.35s; }
+
   .seal{
-    width:74px; height:74px; border-radius:50%;
+    position:absolute; left:50%; top:50%; width:64px; height:64px; border-radius:50%;
+    transform:translate(-50%,-50%) scale(1);
     background:radial-gradient(circle at 35% 30%, var(--gold-light), var(--gold) 60%, var(--gold-deep) 100%);
     display:flex;align-items:center;justify-content:center;
-    box-shadow:0 8px 18px -6px rgba(143,106,53,.6), inset 0 2px 4px rgba(255,255,255,.4);
+    box-shadow:0 8px 18px -6px rgba(143,106,53,.6), inset 0 2px 4px rgba(255,255,255,.5);
     animation: pulse 2.4s ease-in-out infinite;
+    z-index:4; transition:transform .5s ease, box-shadow .5s ease;
   }
-  .seal span{font-family:'Cinzel',serif; color:#fff8ec; font-size:22px; letter-spacing:1px;}
-  @keyframes pulse{ 0%,100%{transform:scale(1);} 50%{transform:scale(1.06);} }
-  .cover-frame .caps{font-size:12px; color:var(--ink-soft);}
-  .cover-frame .tap{font-size:15px; color:var(--gold-deep); margin-top:4px;}
-  .cover-frame .tap svg{display:block; margin:8px auto 0; animation: bounce 1.6s ease-in-out infinite;}
+  .envelope.opening .seal{
+    animation:none;
+    transform:translate(-50%,-50%) scale(1.18);
+    box-shadow:0 0 26px 6px rgba(255,224,150,.9), inset 0 2px 4px rgba(255,255,255,.6);
+  }
+  .seal span{font-family:'Parisienne',cursive; color:#fff8ec; font-size:24px;}
+  @keyframes pulse{ 0%,100%{transform:translate(-50%,-50%) scale(1);} 50%{transform:translate(-50%,-50%) scale(1.06);} }
+
+  .tap{font-size:15px; color:var(--gold-deep); text-align:center;}
+  .tap .caps{display:block; font-size:12px; color:var(--ink-soft); margin-bottom:6px;}
+  .tap svg{display:block; margin:8px auto 0; animation: bounce 1.6s ease-in-out infinite;}
+  .env-wrap.opening .tap{opacity:0; transition:opacity .3s ease;}
   @keyframes bounce{ 0%,100%{transform:translateY(0);} 50%{transform:translateY(6px);} }
 
+  /* ---------- SHELL ---------- */
   .sheet{
     max-width:480px; margin:0 auto; position:relative;
     padding:0 0 60px;
@@ -92,6 +134,7 @@
     margin:18px auto;
   }
 
+  /* Hero */
   .hero-eyebrow{font-size:13px; color:var(--ink-soft); margin-bottom:6px;}
   .hero-name{font-family:'Parisienne',cursive; font-size:58px; line-height:1; color:var(--gold-deep); margin:6px 0 18px; text-shadow:0 1px 0 rgba(255,255,255,.6);}
   .hero-arch{
@@ -108,6 +151,7 @@
     color:var(--gold-deep); text-transform:uppercase;
   }
 
+  /* countdown */
   .countdown{display:flex; justify-content:center; gap:10px; margin-top:22px; flex-wrap:wrap;}
   .cbox{
     background:var(--card); border:1px solid var(--gold-light); border-radius:10px;
@@ -116,6 +160,7 @@
   .cbox .num{font-family:'Cinzel',serif; font-size:24px; color:var(--gold-deep); display:block;}
   .cbox .lbl{font-size:11px; letter-spacing:.08em; color:var(--ink-soft); text-transform:uppercase;}
 
+  /* timeline */
   .section-title{font-family:'Parisienne',cursive; font-size:32px; color:var(--gold-deep); margin-bottom:4px;}
   .section-sub{font-size:13px; color:var(--ink-soft); letter-spacing:.1em; text-transform:uppercase; margin-bottom:26px;}
   .event-card{
@@ -133,6 +178,7 @@
     padding-bottom:2px;
   }
 
+  /* people */
   .people-grid{display:flex; justify-content:center; gap:14px; flex-wrap:wrap; margin-top:10px;}
   .people-card{
     background:var(--card); border:1px solid var(--gold-light); border-radius:14px;
@@ -141,6 +187,7 @@
   .people-card .caps{font-size:11px; color:var(--gold-deep); margin-bottom:8px; display:block;}
   .people-card .names{font-family:'Parisienne',cursive; font-size:22px; color:var(--ink); line-height:1.3;}
 
+  /* rsvp */
   .rsvp-text{font-size:16px; color:var(--ink); max-width:320px; margin:0 auto 22px;}
   .rsvp-text b{color:var(--gold-deep);}
   .btns{display:flex; flex-direction:column; gap:12px; align-items:center;}
@@ -167,20 +214,37 @@
 </head>
 <body>
 
+  <!-- COVER / ENVELOPE -->
   <div id="cover">
-    <div class="cover-frame" id="coverFrame">
-      <div class="seal"><span>SM</span></div>
-      <div>
-        <div class="caps">Botezul micuței</div>
-        <div class="script" style="font-size:30px;color:var(--gold-deep);margin-top:6px;">Sofia Maria</div>
+    <div class="whiteout"></div>
+    <div class="env-wrap" id="envWrap">
+      <div class="envelope-stage">
+        <div class="envelope" id="envelope">
+          <div class="flap flap-left">
+            <svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M10 20 Q20 10 30 20 M8 40 Q18 32 28 40"/></svg>
+          </div>
+          <div class="flap flap-right">
+            <svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M70 20 Q80 10 90 20 M72 40 Q82 32 92 40"/></svg>
+          </div>
+          <div class="flap flap-bottom">
+            <svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M35 88 Q50 78 65 88 M40 94 Q50 88 60 94"/></svg>
+          </div>
+          <div class="flap flap-top">
+            <svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M35 10 Q50 20 65 10 M40 5 Q50 11 60 5"/></svg>
+          </div>
+          <div class="beam"></div>
+          <div class="seal"><span>SM</span></div>
+        </div>
       </div>
       <div class="tap">
+        <span class="caps">Botezul micuței · Sofia Maria</span>
         Atinge pentru a deschide
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
       </div>
     </div>
   </div>
 
+  <!-- MAIN INVITATION -->
   <div class="sheet" id="sheet">
 
     <section id="s-hero">
@@ -241,7 +305,7 @@
 
     <section id="s-rsvp">
       <div class="section-title">Confirmare</div>
-      <p class="rsvp-text">Ne bucurăm să te avem alături! Te rugăm să ne confirmi prezența până la data de <b>20 Octombrie</b>.</p>
+      <p class="rsvp-text">Ne bucurăm să te avem alături! Te rugăm să ne confirmi prezența până la data de <b>1 Octombrie</b>.</p>
 
       <div class="btns">
         <a class="btn btn-solid" id="btnYes" target="_blank" rel="noopener">Voi fi acolo</a>
@@ -256,10 +320,18 @@
   </div>
 
 <script>
-  document.getElementById('coverFrame').addEventListener('click', function(){
-    document.getElementById('cover').classList.add('hide');
-    document.body.style.overflow = 'auto';
-    setTimeout(revealSections, 300);
+  // Envelope opening sequence
+  document.getElementById('envWrap').addEventListener('click', function(){
+    const wrap = this;
+    if(wrap.classList.contains('opening')) return;
+    wrap.classList.add('opening');
+    document.getElementById('envelope').classList.add('opening');
+    document.getElementById('cover').classList.add('opening');
+    setTimeout(function(){
+      document.getElementById('cover').classList.add('hide');
+      document.body.style.overflow = 'auto';
+    }, 1350);
+    setTimeout(revealSections, 1650);
   });
   document.body.style.overflow = 'hidden';
 
