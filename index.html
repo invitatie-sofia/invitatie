@@ -8,23 +8,23 @@
 <meta property="og:title" content="Invitație · Botezul Sofiei Maria 💗">
 <meta property="og:description" content="Sâmbătă, 31 Octombrie 2026 · Vă așteptăm cu drag! Familia Voază">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#F3E2D7">
+<meta name="theme-color" content="#F9E4EA">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Cinzel:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --cream:#fbf3ea;
-    --cream-2:#f6ead9;
-    --card:#fffaf3;
-    --gold:#b8925a;
-    --gold-deep:#8f6a35;
-    --gold-light:#e6cfa1;
+    --cream:#fdf4f6;
+    --cream-2:#f9e4ea;
+    --card:#fffafb;
+    --gold:#d4879b;
+    --gold-deep:#a8536e;
+    --gold-light:#f2c9d5;
     --blush:#f2d9de;
     --blush-deep:#d9a3ad;
-    --ink:#5a4433;
-    --ink-soft:#8a7360;
-    --shadow: 0 20px 45px -20px rgba(107,74,42,0.35);
+    --ink:#5d4049;
+    --ink-soft:#95737f;
+    --shadow: 0 20px 45px -20px rgba(150,80,105,0.28);
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
@@ -43,77 +43,84 @@
     position:fixed; inset:0; z-index:50;
     display:flex; align-items:center; justify-content:center;
     background:
-      radial-gradient(circle at 30% 20%, rgba(230,207,161,.5), transparent 45%),
-      radial-gradient(circle at 80% 85%, rgba(242,217,222,.6), transparent 50%),
-      linear-gradient(160deg, var(--cream) 0%, var(--cream-2) 100%);
-    transition: opacity .8s ease .25s, visibility .8s ease .25s;
+      radial-gradient(circle at 22% 18%, rgba(255,214,226,.75), transparent 42%),
+      radial-gradient(circle at 82% 84%, rgba(248,206,220,.7), transparent 45%),
+      linear-gradient(165deg, #fdf4f6 0%, #f7dde5 100%);
+    transition: opacity .7s ease, visibility .7s ease;
   }
   #cover.hide{opacity:0; visibility:hidden; pointer-events:none;}
-  .whiteout{
-    position:absolute; inset:0; background:radial-gradient(circle at 50% 55%, #fff7e8, #f6e6c9 55%, transparent 78%);
-    opacity:0; pointer-events:none; transition:opacity .5s ease;
-  }
-  #cover.opening .whiteout{opacity:1; transition:opacity .5s ease .55s;}
 
   .env-wrap{
-    display:flex; flex-direction:column; align-items:center; gap:26px;
+    display:flex; flex-direction:column; align-items:center; gap:30px;
     cursor:pointer; -webkit-tap-highlight-color:transparent;
   }
-  .envelope-stage{ width:min(70vw,260px); aspect-ratio:3/4; perspective:900px; }
-  .envelope{
-    position:relative; width:100%; height:100%; transform-style:preserve-3d;
-    filter:drop-shadow(0 18px 30px -14px rgba(107,74,42,.55));
+  .envelope-stage{
+    position:relative;
+    width:min(74vw,280px); aspect-ratio:1/1.32;
+    perspective:1200px;
   }
-  .flap{
-    position:absolute; inset:0; background:#fbf5ea;
-    background-image:
-      repeating-linear-gradient(115deg, rgba(184,146,90,.05) 0 2px, transparent 2px 10px);
+
+  .card-inner{
+    position:absolute; left:6%; width:88%; height:86%; bottom:10%;
+    background:linear-gradient(170deg,#fffdfd 0%, #fdf1f4 100%);
+    border:1px solid #f3cdd8; border-radius:6px;
+    box-shadow:0 6px 18px -8px rgba(150,80,105,.35);
+    display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
+    gap:7px; padding-top:11%;
+    transform:translateY(0) scale(.97); opacity:0;
+    transition:transform 1s cubic-bezier(.22,1,.3,1), opacity .35s ease;
+    z-index:2;
   }
-  .flap svg{position:absolute; stroke:#d8bd8e; fill:none; stroke-width:1;}
-  .bouquet{
-    position:absolute; left:50%; width:62%; height:auto; transform:translateX(-50%);
-    filter:drop-shadow(1px 1.5px 1px rgba(120,90,55,.35)) drop-shadow(-1px -1px 1px rgba(255,255,255,.75));
-    pointer-events:none; z-index:1;
-  }
-  .bouquet-top{ top:6%; }
-  .bouquet-bottom{ bottom:6%; transform:translateX(-50%) rotate(180deg); }
-  .flap-left{  clip-path:polygon(0 0, 0 100%, 50% 50%); border-right:1px solid var(--gold-light); }
-  .flap-right{ clip-path:polygon(100% 0, 100% 100%, 50% 50%); border-left:1px solid var(--gold-light); }
-  .flap-bottom{clip-path:polygon(0 100%, 100% 100%, 50% 50%); border-top:1px solid var(--gold-light); }
-  .flap-top{
-    clip-path:polygon(0 0, 100% 0, 50% 50%); border-bottom:1px solid var(--gold-light);
-    transform-origin:50% 0%; transition:transform 1s cubic-bezier(.5,0,.2,1);
+  .card-inner .mono{font-family:'Parisienne',cursive; font-size:34px; color:var(--gold-deep);}
+  .card-inner .sub{font-family:'Cinzel',serif; font-size:9px; letter-spacing:.22em; color:var(--ink-soft); text-transform:uppercase;}
+  .card-inner .rule{width:44px; height:1px; background:var(--gold-light);}
+  .envelope-stage.opening .card-inner{ opacity:1; transform:translateY(-52%) scale(1); }
+
+  .env-body{
+    position:absolute; inset:0; border-radius:8px; overflow:hidden;
+    background:linear-gradient(160deg,#fdf0f4 0%, #f8dde6 100%);
+    border:1px solid #efc4d2;
+    box-shadow:0 18px 34px -16px rgba(150,80,105,.45), inset 0 1px 0 rgba(255,255,255,.8);
     z-index:3;
   }
-  .envelope.opening .flap-top{ transform:rotateX(-158deg) translateZ(1px); }
-
-  .beam{
-    position:absolute; left:50%; top:50%; width:160%; height:130%;
-    transform:translate(-50%,-92%) scale(.25); transform-origin:50% 100%;
-    clip-path:polygon(38% 100%, 62% 100%, 100% 0%, 0% 0%);
-    background:conic-gradient(from 180deg at 50% 100%, transparent, #ffe6ad, #fff6df, #ffe6ad, transparent);
-    opacity:0; transition:opacity .7s ease, transform 1s cubic-bezier(.3,0,.2,1);
-    z-index:2; mix-blend-mode:screen; pointer-events:none;
+  .env-body::before, .env-body::after{
+    content:""; position:absolute; bottom:0; width:52%; height:78%;
+    background:linear-gradient(150deg,#fbe8ee,#f6d5e0);
   }
-  .envelope.opening .beam{ opacity:.95; transform:translate(-50%,-92%) scale(1); transition-delay:.35s; }
+  .env-body::before{ left:0;  clip-path:polygon(0 0, 0 100%, 100% 100%); border-right:1px solid rgba(255,255,255,.7); }
+  .env-body::after { right:0; clip-path:polygon(100% 0, 100% 100%, 0 100%); border-left:1px solid rgba(255,255,255,.7); }
+  .env-deco{ position:absolute; inset:0; z-index:1; pointer-events:none; opacity:.85; }
+
+  .flap-top{
+    position:absolute; left:0; top:0; width:100%; height:52%;
+    transform-origin:50% 0%;
+    transform:rotateX(0deg);
+    transition:transform .95s cubic-bezier(.6,0,.25,1);
+    z-index:6; backface-visibility:hidden;
+  }
+  .flap-top svg{ width:100%; height:100%; display:block;
+    filter:drop-shadow(0 4px 6px rgba(150,80,105,.22)); }
+  .envelope-stage.opening .flap-top{ transform:rotateX(-172deg); z-index:1; }
 
   .seal{
-    position:absolute; left:50%; top:50%; width:76px; height:76px;
+    position:absolute; left:50%; top:52%; width:74px; height:74px;
     transform:translate(-50%,-50%);
-    z-index:4; animation: pulse 2.4s ease-in-out infinite;
+    z-index:7; animation:pulse 2.6s ease-in-out infinite;
+    transition:opacity .4s ease, transform .5s ease;
   }
-  .seal svg{ width:100%; height:100%; filter:drop-shadow(0 6px 10px rgba(143,106,53,.5)); transition:filter .5s ease; }
-  .envelope.opening .seal{
-    animation:none;
-    transform:translate(-50%,-50%) scale(1.18);
+  .seal svg{ width:100%; height:100%; filter:drop-shadow(0 5px 9px rgba(150,80,105,.5)); }
+  .envelope-stage.opening .seal{
+    animation:none; opacity:0; transform:translate(-50%,-50%) scale(.6);
   }
-  .envelope.opening .seal svg{ filter:drop-shadow(0 0 20px rgba(255,224,150,.95)); }
-  @keyframes pulse{ 0%,100%{transform:translate(-50%,-50%) scale(1);} 50%{transform:translate(-50%,-50%) scale(1.06);} }
+  @keyframes pulse{
+    0%,100%{transform:translate(-50%,-50%) scale(1);}
+    50%{transform:translate(-50%,-50%) scale(1.05);}
+  }
 
-  .tap{font-size:15px; color:var(--gold-deep); text-align:center;}
-  .tap .caps{display:block; font-size:12px; color:var(--ink-soft); margin-bottom:6px;}
-  .tap svg{display:block; margin:8px auto 0; animation: bounce 1.6s ease-in-out infinite;}
-  .env-wrap.opening .tap{opacity:0; transition:opacity .3s ease;}
+  .tap{font-size:15px; color:var(--gold-deep); text-align:center; transition:opacity .3s ease;}
+  .tap .caps{display:block; font-size:11px; color:var(--ink-soft); margin-bottom:6px;}
+  .tap svg{display:block; margin:8px auto 0; animation:bounce 1.8s ease-in-out infinite;}
+  .env-wrap.opening .tap{opacity:0;}
   @keyframes bounce{ 0%,100%{transform:translateY(0);} 50%{transform:translateY(6px);} }
 
   /* ---------- SHELL ---------- */
@@ -141,7 +148,7 @@
   .hero-eyebrow{font-size:13px; color:var(--ink-soft); margin-bottom:6px;}
   .hero-name{font-family:'Parisienne',cursive; font-size:58px; line-height:1; color:var(--gold-deep); margin:6px 0 18px; text-shadow:0 1px 0 rgba(255,255,255,.6);}
   .hero-arch{
-    width:min(72%,230px); height:270px; margin:0 auto 22px;
+    width:min(78%,260px); height:315px; margin:0 auto 22px;
     border:1px solid var(--gold-light);
     border-radius:130px 130px 10px 10px;
     overflow:hidden; position:relative; box-shadow:var(--shadow);
@@ -218,79 +225,79 @@
 
   <!-- COVER / ENVELOPE -->
   <div id="cover">
-    <div class="whiteout"></div>
     <div class="env-wrap" id="envWrap">
-      <div class="envelope-stage">
-        <svg width="0" height="0" style="position:absolute">
-          <defs>
-            <symbol id="bouquet" viewBox="0 0 200 140">
-              <path d="M100 130 C96 105 92 82 100 55" stroke="#cbb686" stroke-width="1.1" fill="none"/>
-              <path d="M100 118 C82 102 62 94 42 98" stroke="#cbb686" stroke-width="1" fill="none"/>
-              <path d="M100 118 C118 102 138 94 158 98" stroke="#cbb686" stroke-width="1" fill="none"/>
-              <path d="M58 102 C47 95 42 82 50 71 C61 79 63 93 58 102 Z" fill="#efe3cd"/>
-              <path d="M42 92 C31 86 27 75 36 65 C46 71 48 83 42 92 Z" fill="#efe3cd"/>
-              <path d="M142 102 C153 95 158 82 150 71 C139 79 137 93 142 102 Z" fill="#efe3cd"/>
-              <path d="M158 92 C169 86 173 75 164 65 C154 71 152 83 158 92 Z" fill="#efe3cd"/>
-              <g transform="translate(100,56)">
-                <ellipse rx="27" ry="19" fill="#f4ecda"/>
-                <ellipse rx="27" ry="19" fill="#f4ecda" transform="rotate(58)"/>
-                <ellipse rx="27" ry="19" fill="#f4ecda" transform="rotate(116)"/>
-                <ellipse rx="20" ry="14" fill="#efe2c3" transform="rotate(29)"/>
-                <ellipse rx="20" ry="14" fill="#efe2c3" transform="rotate(87)"/>
-                <circle r="9" fill="#e9dab3"/>
-              </g>
-              <g transform="translate(62,66)">
-                <circle cx="0" cy="-10" r="7" fill="#f2e8d2"/>
-                <circle cx="9" cy="-4" r="7" fill="#f2e8d2"/>
-                <circle cx="6" cy="7" r="7" fill="#f2e8d2"/>
-                <circle cx="-6" cy="7" r="7" fill="#f2e8d2"/>
-                <circle cx="-9" cy="-4" r="7" fill="#f2e8d2"/>
-                <circle r="4" fill="#e6d5a9"/>
-              </g>
-              <g transform="translate(138,66)">
-                <circle cx="0" cy="-10" r="7" fill="#f2e8d2"/>
-                <circle cx="9" cy="-4" r="7" fill="#f2e8d2"/>
-                <circle cx="6" cy="7" r="7" fill="#f2e8d2"/>
-                <circle cx="-6" cy="7" r="7" fill="#f2e8d2"/>
-                <circle cx="-9" cy="-4" r="7" fill="#f2e8d2"/>
-                <circle r="4" fill="#e6d5a9"/>
-              </g>
-              <circle cx="78" cy="42" r="2.2" fill="#e7d9b8"/>
-              <circle cx="122" cy="42" r="2.2" fill="#e7d9b8"/>
-              <circle cx="92" cy="26" r="1.6" fill="#e7d9b8"/>
-              <circle cx="108" cy="26" r="1.6" fill="#e7d9b8"/>
-              <circle cx="100" cy="18" r="1.6" fill="#e7d9b8"/>
-            </symbol>
-          </defs>
-        </svg>
-        <div class="envelope" id="envelope">
-          <div class="flap flap-left"></div>
-          <div class="flap flap-right"></div>
-          <div class="flap flap-bottom">
-            <svg class="bouquet bouquet-bottom" viewBox="0 0 200 140"><use href="#bouquet"/></svg>
-          </div>
-          <div class="flap flap-top">
-            <svg class="bouquet bouquet-top" viewBox="0 0 200 140"><use href="#bouquet"/></svg>
-          </div>
-          <div class="beam"></div>
-          <div class="seal">
-            <svg viewBox="0 0 100 100">
-              <defs>
-                <radialGradient id="sealGrad" cx="35%" cy="28%" r="75%">
-                  <stop offset="0%" stop-color="#f6e6bd"/>
-                  <stop offset="55%" stop-color="#b8925a"/>
-                  <stop offset="100%" stop-color="#8f6a35"/>
-                </radialGradient>
-              </defs>
-              <path d="M 90.00 50.00 Q 90.00 50.00 94.85 60.24 Q 94.85 60.24 86.04 67.36 Q 86.04 67.36 85.96 78.68 Q 85.96 78.68 74.94 81.27 Q 74.94 81.27 69.96 91.44 Q 69.96 91.44 58.90 89.00 Q 58.90 89.00 50.00 96.00 Q 50.00 96.00 41.10 89.00 Q 41.10 89.00 30.04 91.44 Q 30.04 91.44 25.06 81.27 Q 25.06 81.27 14.04 78.68 Q 14.04 78.68 13.96 67.36 Q 13.96 67.36 5.15 60.24 Q 5.15 60.24 10.00 50.00 Q 10.00 50.00 5.15 39.76 Q 5.15 39.76 13.96 32.64 Q 13.96 32.64 14.04 21.32 Q 14.04 21.32 25.06 18.73 Q 25.06 18.73 30.04 8.56 Q 30.04 8.56 41.10 11.00 Q 41.10 11.00 50.00 4.00 Q 50.00 4.00 58.90 11.00 Q 58.90 11.00 69.96 8.56 Q 69.96 8.56 74.94 18.73 Q 74.94 18.73 85.96 21.32 Q 85.96 21.32 86.04 32.64 Q 86.04 32.64 94.85 39.76 Q 94.85 39.76 90.00 50.00 Z" fill="url(#sealGrad)" stroke="#fff8ec" stroke-width="1" stroke-opacity=".55"/>
-              <circle cx="50" cy="50" r="34" fill="none" stroke="#fff8ec" stroke-width="1" stroke-opacity=".6"/>
-              <text x="50" y="63" text-anchor="middle" font-family="Parisienne, cursive" font-size="40" fill="#fff8ec">S</text>
-            </svg>
-          </div>
+      <div class="envelope-stage" id="stage">
+
+        <div class="card-inner">
+          <div class="sub">Botezul micu&#539;ei</div>
+          <div class="mono">Sofia Maria</div>
+          <div class="rule"></div>
+          <div class="sub">31 . 10 . 2026</div>
         </div>
+
+        <div class="env-body">
+          <svg class="env-deco" viewBox="0 0 200 264" preserveAspectRatio="none">
+            <g stroke="#e9aec1" stroke-width="1.1" fill="none" opacity=".55">
+              <path d="M20 236 C34 224 40 210 38 196"/>
+              <path d="M38 210 C28 206 22 198 22 190"/>
+              <path d="M38 200 C48 198 54 190 55 182"/>
+              <path d="M180 236 C166 224 160 210 162 196"/>
+              <path d="M162 210 C172 206 178 198 178 190"/>
+              <path d="M162 200 C152 198 146 190 145 182"/>
+            </g>
+            <g fill="#f0bccd" opacity=".6">
+              <circle cx="22" cy="188" r="3.4"/><circle cx="56" cy="180" r="3"/>
+              <circle cx="36" cy="194" r="2.4"/>
+              <circle cx="178" cy="188" r="3.4"/><circle cx="144" cy="180" r="3"/>
+              <circle cx="164" cy="194" r="2.4"/>
+            </g>
+          </svg>
+        </div>
+
+        <div class="flap-top">
+          <svg viewBox="0 0 200 104" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="flapG" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#fdeff4"/>
+                <stop offset="100%" stop-color="#f4cfdc"/>
+              </linearGradient>
+            </defs>
+            <path d="M0 0 H200 L100 104 Z" fill="url(#flapG)" stroke="#e9b8c9" stroke-width="1"/>
+            <g stroke="#e3a3b9" stroke-width="1.1" fill="none" opacity=".65">
+              <path d="M100 74 C100 60 100 48 100 38"/>
+              <path d="M100 56 C88 52 80 44 78 34"/>
+              <path d="M100 56 C112 52 120 44 122 34"/>
+              <path d="M100 44 C92 40 88 33 88 26"/>
+              <path d="M100 44 C108 40 112 33 112 26"/>
+            </g>
+            <g fill="#eeb3c7" opacity=".75">
+              <circle cx="100" cy="34" r="4.2"/>
+              <circle cx="78" cy="32" r="3.2"/><circle cx="122" cy="32" r="3.2"/>
+              <circle cx="88" cy="24" r="2.4"/><circle cx="112" cy="24" r="2.4"/>
+              <circle cx="100" cy="20" r="2.6"/>
+            </g>
+          </svg>
+        </div>
+
+        <div class="seal">
+          <svg viewBox="0 0 100 100">
+            <defs>
+              <radialGradient id="sealG" cx="34%" cy="28%" r="76%">
+                <stop offset="0%" stop-color="#f7c3d3"/>
+                <stop offset="52%" stop-color="#d4879b"/>
+                <stop offset="100%" stop-color="#a8536e"/>
+              </radialGradient>
+            </defs>
+            <path d="M 90.00 50.00 Q 90.00 50.00 94.85 60.24 Q 94.85 60.24 86.04 67.36 Q 86.04 67.36 85.96 78.68 Q 85.96 78.68 74.94 81.27 Q 74.94 81.27 69.96 91.44 Q 69.96 91.44 58.90 89.00 Q 58.90 89.00 50.00 96.00 Q 50.00 96.00 41.10 89.00 Q 41.10 89.00 30.04 91.44 Q 30.04 91.44 25.06 81.27 Q 25.06 81.27 14.04 78.68 Q 14.04 78.68 13.96 67.36 Q 13.96 67.36 5.15 60.24 Q 5.15 60.24 10.00 50.00 Q 10.00 50.00 5.15 39.76 Q 5.15 39.76 13.96 32.64 Q 13.96 32.64 14.04 21.32 Q 14.04 21.32 25.06 18.73 Q 25.06 18.73 30.04 8.56 Q 30.04 8.56 41.10 11.00 Q 41.10 11.00 50.00 4.00 Q 50.00 4.00 58.90 11.00 Q 58.90 11.00 69.96 8.56 Q 69.96 8.56 74.94 18.73 Q 74.94 18.73 85.96 21.32 Q 85.96 21.32 86.04 32.64 Q 86.04 32.64 94.85 39.76 Q 94.85 39.76 90.00 50.00 Z" fill="url(#sealG)" stroke="#fff3f7" stroke-width="1" stroke-opacity=".5"/>
+            <circle cx="50" cy="50" r="33" fill="none" stroke="#fff3f7" stroke-width="1" stroke-opacity=".55"/>
+            <text x="50" y="64" text-anchor="middle" font-family="Parisienne, cursive" font-size="42" fill="#fff6f9">S</text>
+          </svg>
+        </div>
+
       </div>
+
       <div class="tap">
-        <span class="caps">Botezul micuței · Sofia Maria</span>
+        <span class="caps">Botezul micu&#539;ei &middot; Sofia Maria</span>
         Atinge pentru a deschide
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
       </div>
@@ -373,17 +380,19 @@
 
 <script>
   // Envelope opening sequence
-  document.getElementById('envWrap').addEventListener('click', function(){
-    const wrap = this;
-    if(wrap.classList.contains('opening')) return;
-    wrap.classList.add('opening');
-    document.getElementById('envelope').classList.add('opening');
-    document.getElementById('cover').classList.add('opening');
+  var envWrap = document.getElementById('envWrap');
+  var stage = document.getElementById('stage');
+  var opened = false;
+  envWrap.addEventListener('click', function(){
+    if (opened) return;
+    opened = true;
+    envWrap.classList.add('opening');
+    stage.classList.add('opening');
     setTimeout(function(){
       document.getElementById('cover').classList.add('hide');
       document.body.style.overflow = 'auto';
-    }, 1350);
-    setTimeout(revealSections, 1650);
+      revealSections();
+    }, 1750);
   });
   document.body.style.overflow = 'hidden';
 
