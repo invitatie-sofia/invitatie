@@ -141,13 +141,12 @@
   .hero-eyebrow{font-size:13px; color:var(--ink-soft); margin-bottom:6px;}
   .hero-name{font-family:'Parisienne',cursive; font-size:58px; line-height:1; color:var(--gold-deep); margin:6px 0 18px; text-shadow:0 1px 0 rgba(255,255,255,.6);}
   .hero-arch{
-    width:min(78%,240px); margin:0 auto 22px; padding:34px 18px 26px;
+    width:min(72%,230px); height:270px; margin:0 auto 22px;
     border:1px solid var(--gold-light);
-    border-radius:130px 130px 8px 8px;
-    background:linear-gradient(180deg, rgba(255,255,255,.5), rgba(255,255,255,.15));
-    position:relative;
+    border-radius:130px 130px 10px 10px;
+    overflow:hidden; position:relative; box-shadow:var(--shadow);
   }
-  .hero-arch svg{width:46px; height:46px; color:var(--gold);}
+  .hero-arch img{ width:100%; height:100%; object-fit:cover; display:block; }
   .hero-text{font-size:17px; line-height:1.7; color:var(--ink); max-width:360px; margin:0 auto;}
   .hero-date{
     margin-top:26px; font-family:'Cinzel',serif; font-size:14px; letter-spacing:.15em;
@@ -306,7 +305,7 @@
       <div class="hero-name">Sofia Maria</div>
 
       <div class="hero-arch">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 21c-4-2-7-5-7-9a7 7 0 0114 0c0 4-3 7-7 9z"/><circle cx="12" cy="9" r="2.4"/></svg>
+        <img src="assets/sofia.jpg" alt="Sofia Maria">
       </div>
 
       <p class="hero-text">Cu inimile pline de bucurie, vă invităm să fiți alături de noi în ziua în care fetița noastră primește Taina Sfântului Botez.</p>
@@ -343,8 +342,7 @@
     </section>
 
     <section id="s-people">
-      <div class="section-title">Alături de noi</div>
-      <div class="section-sub">Cei care ne-au dăruit această zi</div>
+      <div class="section-title">Familia noastră</div>
       <div class="people-grid">
         <div class="people-card">
           <span class="caps">Părinți</span>
